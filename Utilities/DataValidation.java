@@ -2,6 +2,10 @@ package Utilities;
 
 import Utilities.ParcelExceptions.ExceptionsValidation;
 import Utilities.ParcelExceptions.InvalidInput;
+import Utilities.TypesOfDelivery.DeliveryCategories;
+import Utilities.TypesOfDelivery.Express;
+import Utilities.TypesOfDelivery.SameDay;
+import Utilities.TypesOfDelivery.Standard;
 
 import java.util.Scanner;
 
@@ -96,5 +100,59 @@ public class DataValidation {
         }
 
         return res;
+    }
+
+    private static double isvalidWeight(String input, double maxWeight) throws InvalidInput {
+        double res;
+
+        try {
+            res = Double.parseDouble(input);
+        } catch (NumberFormatException e) {
+            throw new InvalidInput("Invalid input. Please enter a valid number.");
+        }
+
+        if (res <= 0) {
+            throw new InvalidInput("Weight mus not be zero.");
+        } else if (res>maxWeight) {
+            throw new InvalidInput("Weight must not be heavier than " + maxWeight + " kg for this parcel type.");
+        }
+
+        return res;
+    }
+
+    public static double validateWeight(double maxWeight) {
+        boolean again = true;
+        double res = 0;
+
+        while (again) {
+            System.out.print("Enter weight in kg (max " + maxWeight + "): ");
+
+            try {
+                res = isvalidWeight(sc.nextLine().trim(), maxWeight);
+                again = false;
+            } catch (InvalidInput e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        return res;
+    }
+
+    public static DeliveryCategories readService(int choice) {
+        DeliveryCategories cat = null;
+        switch (choice) {
+            case 1 -> {
+                cat = new Standard();
+                break;
+            }
+            case 2 -> {
+                cat = new Express();
+            }
+            case 3 -> {
+                cat = new SameDay();
+            }
+        }
+        
+        return cat;
     }
 }

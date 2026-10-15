@@ -1,9 +1,8 @@
 import Utilities.DataValidation;
 import Utilities.Menu;
-import Utilities.ParcelConfiguration;
 
 public class Main {
-    public static void main() {
+    public static void main(String[] args) {
         Menu menu = new Menu();
 
         boolean again=true;
@@ -20,10 +19,10 @@ public class Main {
             int choice = DataValidation.validateInt("Enter choice", 1, 5);
 
             switch (choice) {
-                case 1 -> // function 1
-                case 2 -> // function 2
-                case 3 -> // function 3
-                case 4 -> // function 4
+                case 1 -> menu.addParcel();
+                case 2 -> menu.viewParcels();
+                case 3 -> menu.changeDeliveryService();
+                case 4 -> menu.markDelivered();
                 case 5 -> again = false;
             }
         }
