@@ -45,22 +45,27 @@ public class Menu {
             parcel = new Document(tn, receiver, weight, pages);
         } else if (choice==2) {
             double weight = DataValidation.validateWeight(Box.max_weight);
-            int length = DataValidation.validateInt("Enter length (cm): ", 1, Integer.MAX_VALUE);
-            int width = DataValidation.validateInt("Enter width (cm): ", 1, Integer.MAX_VALUE);
-            int height = DataValidation.validateInt("Enter height (cm): ", 1, Integer.MAX_VALUE);
+            double length = DataValidation.validateDouble("Enter length (cm): ", 1, Double.MAX_VALUE);
+            double width = DataValidation.validateDouble("Enter width (cm): ", 1, Double.MAX_VALUE);
+            double height = DataValidation.validateDouble("Enter height (cm): ", 1, Double.MAX_VALUE);
             parcel = new Box(tn, receiver, weight, length, width, height);
         } else {
             double weight = DataValidation.validateWeight(Fragile.max_weight);
-            int length = DataValidation.validateInt("Enter length (cm): ", 1, Integer.MAX_VALUE);
-            int width = DataValidation.validateInt("Enter width (cm): ", 1, Integer.MAX_VALUE);
-            int height = DataValidation.validateInt("Enter height (cm): ", 1, Integer.MAX_VALUE);
+            double length = DataValidation.validateDouble("Enter length (cm): ", 1, Double.MAX_VALUE);
+            double width = DataValidation.validateDouble("Enter width (cm): ", 1, Double.MAX_VALUE);
+            double height = DataValidation.validateDouble("Enter height (cm): ", 1, Double.MAX_VALUE);
             String hndlnote = DataValidation.validateString("Enter handling note: ");
             parcel = new Fragile(tn, receiver, weight, length, width, height, hndlnote);
         }
 
+        char choicev3 = DataValidation.validatechar("Would you like to change your delivery service? (Y/N):", "YN");
+        if (choicev3=='Y') {
+            changeDeliveryService();
+        }
+
         try {
             config.addParcel(parcel);
-            System.out.printf("Parcel added successfully! Delivery fee: %.2f", parcel.getfee());
+            System.out.printf("Parcel added successfully! Delivery fee: %.2f\n", parcel.getfee());
         } catch (DuplicateTNException e) {
             System.out.println(e.getMessage());
         }

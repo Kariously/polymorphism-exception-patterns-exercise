@@ -13,7 +13,7 @@ public class DisplayConfiguration {
 
         String line = "-".repeat(104);
         System.out.println(line);
-        System.out.printf("%-12s %-10s %-20s %13s %-10s %14s %-10s%n",
+        System.out.printf("%-12s %-10s %-20s %11s %-10s %12s %-10s%n",
                 "Tracking No.", "Type", "Receiver", "Charge Wt(kg)", "Service", "Fee (Php)", "Status");
         System.out.println(line);
 

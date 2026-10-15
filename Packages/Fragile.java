@@ -4,7 +4,7 @@ public class Fragile extends Box{
     public static final double max_weight = 30;
     private final String hndlnote;
 
-    public Fragile(String TN, String receiver, double weight, int length, int width, int height, String hndlnote) {
+    public Fragile(String TN, String receiver, double weight, double length, double width, double height, String hndlnote) {
         super(TN, receiver, weight, length, width, height);
         this.hndlnote = hndlnote;
     }

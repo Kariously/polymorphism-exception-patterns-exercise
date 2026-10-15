@@ -8,7 +8,7 @@ public class Main {
         boolean again=true;
 
         while (again) {
-            System.out.println("=== PARCEL DELIVERY SYSTEM ===");
+            System.out.println("\n=== PARCEL DELIVERY SYSTEM ===");
             System.out.println("""
                     [1] Add Parcel
                     [2] View All Parcels
@@ -16,7 +16,7 @@ public class Main {
                     [4] Mark as Delivered
                     [5] Exit""");
 
-            int choice = DataValidation.validateInt("Enter choice", 1, 5);
+            int choice = DataValidation.validateInt("Enter choice: ", 1, 5);
 
             switch (choice) {
                 case 1 -> menu.addParcel();

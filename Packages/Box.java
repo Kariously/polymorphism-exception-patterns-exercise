@@ -2,11 +2,11 @@ package Packages;
 
 public class Box extends Parcel {
     public static final double max_weight = 50;
-    private final int length;
-    private final int width;
-    private final int height;
+    private final double length;
+    private final double width;
+    private final double height;
 
-    public Box(String TN, String receiver, double weight, int length, int width, int height) {
+    public Box(String TN, String receiver, double weight, double length, double width, double height) {
         super(TN, receiver, weight);
         this.length = length;
         this.width = width;
@@ -32,7 +32,7 @@ public class Box extends Parcel {
         return "Box";
     }
 
-    public int getLength() { return length; }
-    public int getWidth()  { return width; }
-    public int getHeight() { return height; }
+    public double getLength() { return length; }
+    public double getWidth()  { return width; }
+    public double getHeight() { return height; }
 }
