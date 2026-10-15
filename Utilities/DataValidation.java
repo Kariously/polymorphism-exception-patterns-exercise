@@ -13,6 +13,10 @@ public class DataValidation {
     static Scanner sc = new Scanner(System.in);
 
     private static int toInt(String input, int min, int max) throws ExceptionsValidation {
+        if (!input.matches("0|[1-9]\\d*")) {
+            throw new ExceptionsValidation("Invalid input. Please enter a valid number.");
+        }
+
         int res;
 
         try {
@@ -37,10 +41,11 @@ public class DataValidation {
 
         while (again) {
             System.out.print(prompt);
-
             try {
                 res = toInt(sc.nextLine().trim(), min, max);
-                again = false;
+                if (res<= max && res >=min) {
+                    again = false;
+                }
             } catch (ExceptionsValidation e) {
                 System.out.println(e.getMessage());
             }
@@ -113,7 +118,7 @@ public class DataValidation {
         }
 
         if (res <= 0) {
-            throw new InvalidInput("Weight mus not be zero.");
+            throw new InvalidInput("Weight must not be zero.");
         } else if (res>maxWeight) {
             throw new InvalidInput("Weight must not be heavier than " + maxWeight + " kg for this parcel type.");
         }

@@ -20,6 +20,8 @@ public abstract class Parcel {
 
     public abstract double getChargeableWeight();
 
+    public DeliveryCategories getCat() { return cat; }
+
     public abstract double getBaseFee();
 
     public abstract String getTypeName();
