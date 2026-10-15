@@ -1,11 +1,15 @@
 package Utilities;
 
+import Packages.Parcel;
+import Utilities.ParcelExceptions.DuplicateTNException;
+
 public class Menu {
     private final ParcelConfiguration config = ParcelConfiguration.getInstance();
 
     public void addParcel() {
         String tn;
         boolean again = true;
+        Parcel parcel;
 
         System.out.println("=== ADD PARCEL TO SYSTEM ===");
         System.out.println("""
@@ -19,8 +23,17 @@ public class Menu {
             tn = DataValidation.readTN();
 
             try {
-                config
+                config.isTNAvailable(tn);
+                again = false;
+            } catch (DuplicateTNException e) {
+                System.out.println(e.getMessage());
             }
+        }
+
+        String receiver = DataValidation.validateString("Enter your name: ");
+
+        if (type==1) {
+            double weight =
         }
     }
 }

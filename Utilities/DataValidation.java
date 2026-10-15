@@ -1,6 +1,8 @@
 package Utilities;
 
 import Utilities.ParcelExceptions.ExceptionsValidation;
+import Utilities.ParcelExceptions.InvalidInput;
+
 import java.util.Scanner;
 
 public class DataValidation {
@@ -63,6 +65,32 @@ public class DataValidation {
             try {
                 res = isvalidTN(sc.nextLine().trim());
             } catch (ExceptionsValidation e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        return res;
+    }
+
+    private static String isvalidString(String input) throws InvalidInput {
+        if (input.isEmpty()) {
+            throw new InvalidInput("Invalid String Input");
+        }
+
+        return input;
+    }
+
+    public static String validateString(String prompt) {
+        boolean again = true;
+        String res = "";
+
+        while (again) {
+            System.out.print(prompt);
+
+            try {
+                res = isvalidString(sc.nextLine().trim());
+                again = false;
+            } catch (InvalidInput e) {
                 System.out.println(e.getMessage());
             }
         }
