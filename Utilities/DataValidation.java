@@ -1,4 +1,72 @@
 package Utilities;
 
+import Utilities.ParcelExceptions.ExceptionsValidation;
+import java.util.Scanner;
+
 public class DataValidation {
+    static Scanner sc = new Scanner(System.in);
+
+    private static int toInt(String input, int min, int max) throws ExceptionsValidation {
+        int res;
+
+        try {
+            res = Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new ExceptionsValidation("Invalid input. Please enter a valid number.");
+        }
+
+        if (res < min) {
+            throw new ExceptionsValidation("Invalid input. Must be at least " + min + ".");
+        }
+        if (res > max) {
+            throw new ExceptionsValidation("Invalid input. Enter a number from " + min + " to " + max + ".");
+        }
+
+        return res;
+    }
+
+    public static int validateInt(String prompt, int min, int max) {
+        boolean again = true;
+        int res = 0;
+
+        while (again) {
+            System.out.print(prompt);
+
+            try {
+                res = toInt(sc.nextLine().trim(), min, max);
+                again = false;
+            } catch (ExceptionsValidation e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        return res;
+    }
+
+    private static String isvalidTN(String input) throws ExceptionsValidation {
+        String tn = input.toUpperCase();
+
+        if (!tn.matches("^ABC\\d{4}$")) {
+            throw new ExceptionsValidation("Invalid tracking number.");
+        }
+
+        return tn;
+    }
+
+    public static String readTN() {
+        boolean again = true;
+        String res = "";
+
+        while (again) {
+            System.out.print("Enter tracking number (e.g. ABC0001): ");
+
+            try {
+                res = isvalidTN(sc.nextLine().trim());
+            } catch (ExceptionsValidation e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        return res;
+    }
 }
