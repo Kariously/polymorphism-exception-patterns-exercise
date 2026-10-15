@@ -20,7 +20,7 @@ public class SameDay implements DeliveryCategories {
 
     @Override
     public String restriction() {
-        return "Same Day delivery only allows parcels up to 10 kg.";
+        return "Same Day delivery only allows parcels up to 10 kg!";
     }
 
 }

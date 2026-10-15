@@ -81,13 +81,16 @@ public class Menu {
 
             System.out.println("=== DELIVERY SERVICE ===");
             System.out.println("""
-                    [1] Standard
-                    [2] Express
-                    [3] Same Day""");
+                [1] Standard
+                [2] Express
+                [3] Same Day""");
 
             int choicev2 = DataValidation.validateInt("Enter choice: ", 1, 3);
             DeliveryCategories cat = DataValidation.readService(choicev2);
+
             parcel.setCat(cat);
+            System.out.printf("Delivery service changed! New fee: Php %.2f%n", parcel.getfee());
+
         } catch (ParcelNotFoundException | ServiceNotFound | ParcelAlreadyDelivered e) {
             System.out.println(e.getMessage());
         }
