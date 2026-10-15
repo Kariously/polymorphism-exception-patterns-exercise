@@ -212,7 +212,6 @@ public class DataValidation {
         switch (choice) {
             case 1 -> {
                 cat = new Standard();
-                break;
             }
             case 2 -> {
                 cat = new Express();

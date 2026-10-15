@@ -28,10 +28,6 @@ public abstract class Parcel {
         return cat.calculatefee(getBaseFee());
     }
 
-    public DeliveryCategories getCat() { return cat; }
-
-    public String getTypeofDelivery() { return cat.getName(); }
-
     public String getTn() { return tn; }
 
     public String getReceiver() { return receiver; }

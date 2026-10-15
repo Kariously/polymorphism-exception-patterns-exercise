@@ -18,6 +18,4 @@ public class Fragile extends Box{
     public String getTypeName() {
         return "Fragile";
     }
-
-    public String getHndlnote() { return hndlnote; }
 }

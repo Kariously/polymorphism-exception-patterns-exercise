@@ -4,10 +4,7 @@ import Packages.Parcel;
 import Utilities.ParcelExceptions.DuplicateTNException;
 import Utilities.ParcelExceptions.ParcelAlreadyDelivered;
 import Utilities.ParcelExceptions.ParcelNotFoundException;
-
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class ParcelConfiguration {
     private static ParcelConfiguration instance;
