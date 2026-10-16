@@ -46,7 +46,7 @@ public class ParcelConfiguration {
         Parcel p = findParcel(TN);
 
         if (p.isDelivered()) {
-            throw new ParcelAlreadyDelivered("Parcel already delivered!");
+            throw new ParcelAlreadyDelivered();
         }
         return p;
     }
@@ -55,7 +55,7 @@ public class ParcelConfiguration {
         Parcel p = findParcel(TN);
 
         if (p.isDelivered()) {
-            throw new ParcelAlreadyDelivered("Parcel already delivered.");
+            throw new ParcelAlreadyDelivered();
         }
 
         p.markDelivered();
