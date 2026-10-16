@@ -1,8 +1,8 @@
 package Packages;
 
 public class Box extends Parcel {
-    public static final double min_dimension = 5;
-    public static final double max_dimension = 100;
+    public static final int min_dimension = 5;
+    public static final int max_dimension = 100;
     public static final double max_weight = 50;
     private final double length;
     private final double width;

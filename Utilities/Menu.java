@@ -9,18 +9,18 @@ import Utilities.ParcelExceptions.ParcelAlreadyDelivered;
 import Utilities.ParcelExceptions.ParcelNotFoundException;
 import Utilities.ParcelExceptions.ServiceNotFound;
 import Utilities.TypesOfDelivery.DeliveryCategories;
-
 import java.util.ArrayList;
 
 public class Menu {
     private final ParcelConfiguration config = ParcelConfiguration.getInstance();
-    private final ArrayList<Parcel> parcels = new ArrayList<>();
     private int count = 0;
 
     public void addParcel() {
         count =1;
         Parcel parcel;
-        String tn;
+        String tn="";
+        boolean again = true;
+        boolean againv2 = true;
 
         System.out.println("\n=== ADD PARCEL TO SYSTEM ===");
         System.out.println("""
@@ -30,11 +30,11 @@ public class Menu {
 
         int choice = DataValidation.validateInt("Select parcel type: ", 1, 3);
 
-        while (true) {
+        while (again) {
             tn = DataValidation.readTN();
             try {
                 config.isTNAvailable(tn);
-                break;
+                again=false;
             } catch (DuplicateTNException e) {
                 System.out.println(e.getMessage());
             }
@@ -48,23 +48,23 @@ public class Menu {
             parcel = new Document(tn, receiver, weight, pages);
         } else if (choice == 2) {
             double weight = DataValidation.validateWeight(Box.max_weight);
-            double length = DataValidation.validateDouble("Enter length (cm): ", Box.min_dimension, Box.max_dimension);
-            double width = DataValidation.validateDouble("Enter width (cm): ", Box.min_dimension, Box.max_dimension);
-            double height = DataValidation.validateDouble("Enter height (cm): ", Box.min_dimension, Box.max_dimension);
+            int length = DataValidation.validateInt("Enter length (cm): ", Box.min_dimension, Box.max_dimension);
+            int width = DataValidation.validateInt("Enter width (cm): ", Box.min_dimension, Box.max_dimension);
+            int height = DataValidation.validateInt("Enter height (cm): ", Box.min_dimension, Box.max_dimension);
             parcel = new Box(tn, receiver, weight, length, width, height);
         } else {
             double weight = DataValidation.validateWeight(Fragile.max_weight);
-            double length = DataValidation.validateDouble("Enter length (cm): ", Fragile.min_dimension, Fragile.max_dimension);
-            double width = DataValidation.validateDouble("Enter width (cm): ", Fragile.min_dimension, Fragile.max_dimension);
-            double height = DataValidation.validateDouble("Enter height (cm): ", Fragile.min_dimension, Fragile.max_dimension);
+            int length = DataValidation.validateInt("Enter length (cm): ", Fragile.min_dimension, Fragile.max_dimension);
+            int width = DataValidation.validateInt("Enter width (cm): ", Fragile.min_dimension, Fragile.max_dimension);
+            int height = DataValidation.validateInt("Enter height (cm): ", Fragile.min_dimension, Fragile.max_dimension);
             String hndlnote = DataValidation.validateString("Enter handling note: ");
             parcel = new Fragile(tn, receiver, weight, length, width, height, hndlnote);
         }
 
-        while (true) {
+        while (againv2) {
             try {
                 parcel.setCat(askService());
-                break;
+                againv2=false;
             } catch (ServiceNotFound e) {
                 System.out.println(e.getMessage());
             }
@@ -80,7 +80,9 @@ public class Menu {
 
     public void viewParcels() {
         if (count==0) {
-            System.out.println("\nNo items have been added yet.");
+            System.out.println("\n=============================");
+            System.out.println("No items have been added yet.");
+            System.out.println("=============================");
             return;
         }
 
@@ -90,20 +92,30 @@ public class Menu {
 
     public void changeDeliveryService() {
         if (count==0) {
-            System.out.println("\nNo items have been added yet.");
+            System.out.println("\n=============================");
+            System.out.println("No items have been added yet.");
+            System.out.println("=============================");
             return;
         }
         try {
             Parcel parcel = config.findPending(DataValidation.readTN());
-            parcel.setCat(askService());
+            DeliveryCategories cat = askService();
+
+            if (parcel.getCat().getName().equals(cat.getName())) {
+                System.out.println("You already have this delivery service.");
+                return;
+            }
+
+            parcel.setCat(cat);
             System.out.printf("Delivery service changed! New fee: Php %.2f%n", parcel.getfee());
+
         } catch (ParcelNotFoundException | ServiceNotFound | ParcelAlreadyDelivered e) {
             System.out.println(e.getMessage());
         }
     }
 
     private DeliveryCategories askService() {
-        System.out.println("=== DELIVERY SERVICE ===");
+        System.out.println("\n=== DELIVERY SERVICE ===");
         System.out.println("""
             [1] Standard
             [2] Express
@@ -114,7 +126,9 @@ public class Menu {
 
     public void markDelivered() {
         if (count==0) {
-            System.out.println("\nNo items have been added yet.");
+            System.out.println("\n=============================");
+            System.out.println("No items have been added yet.");
+            System.out.println("=============================");
             return;
         }
 

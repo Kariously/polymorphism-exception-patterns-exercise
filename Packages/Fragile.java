@@ -1,8 +1,8 @@
 package Packages;
 
 public class Fragile extends Box{
-    public static final double min_dimension = 5;
-    public static final double max_dimension = 80;
+    public static final int min_dimension = 5;
+    public static final int max_dimension = 80;
     public static final double max_weight = 30;
     private final String hndlnote;
 
